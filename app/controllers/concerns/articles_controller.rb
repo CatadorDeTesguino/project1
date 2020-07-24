@@ -28,12 +28,18 @@ class ArticlesController <ApplicationController
 
     def update
         @article = Aritcle.find(params[id])
-        if @artice.update(params.require(:article).permit(:title :description))
+        if @artice.update(params.require(:article).permit(:title, :description))
             flash[:notice] = "Article was updated succesfully"
             redirect_to @article #Por que redirec 
         else 
             render 'edit'
         end
+    end
+
+    def destroy
+        @article = Aritcle.find(params[id])
+        @article.destroy
+        redirect_to articles_path
     end
 
 
